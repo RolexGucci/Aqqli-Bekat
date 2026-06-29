@@ -2,352 +2,411 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Aqlli Bekat</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
+:root{
+  --bg:     #ffffff;
+  --bg2:    #f7f8fa;
+  --surface:#f0f4f3;
+  --accent: #128C7E;
+  --accent2:#25D366;
+  --text:   #111b21;
+  --muted:  #667781;
+  --line:   #e9edef;
+
+  /* Pastell kartochka ranglari */
+  --pi1:#d4edda; /* mint yashil */
+  --pi2:#ddd5f5; /* lavanda */
+  --pi3:#cfe8ed; /* moviy-teal */
+  --pi4:#fde8d0; /* shaftoli-bej */
+  --pi5:#fdd5d5; /* och qizil */
+  --pi6:#fef3cc; /* sariq */
+}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:'Nunito',sans-serif;background:#f8fbff;color:#0c4a6e;min-height:100vh;max-width:430px;margin:0 auto;overflow-x:hidden}
-.header{background:linear-gradient(135deg,#38bdf8,#0284c7);padding:20px 18px 28px;position:relative;overflow:hidden}
-.header::after{content:'';position:absolute;top:-30px;right:-20px;width:100px;height:100px;background:rgba(253,230,138,0.25);border-radius:50%}
-.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.logo{font-size:19px;font-weight:900;color:#fff;letter-spacing:-0.5px}
-.logo em{color:#fde68a;font-style:normal}
-.header-icons{display:flex;gap:8px}
-.icon-btn{background:rgba(255,255,255,0.18);border:none;border-radius:12px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:white;font-size:17px;position:relative}
-.badge{position:absolute;top:-4px;right:-4px;background:#fb7185;color:white;font-size:9px;font-weight:900;width:16px;height:16px;border-radius:50%;display:none;align-items:center;justify-content:center}
-.search{background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.25);border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.75);font-size:13px}
-.banners{padding:16px 18px 0}
-.banner-track{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory}
-.banner-track::-webkit-scrollbar{display:none}
-.banner-card{min-width:100%;border-radius:20px;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;scroll-snap-align:start;flex-shrink:0;position:relative;overflow:hidden}
-.b1{background:linear-gradient(135deg,#fde68a,#fbbf24)}
-.b2{background:linear-gradient(135deg,#fbcfe8,#f472b6)}
-.b3{background:linear-gradient(135deg,#bae6fd,#38bdf8)}
-.banner-text strong{font-size:14px;font-weight:900;display:block;margin-bottom:4px}
-.b1 .banner-text strong{color:#78350f}
-.b2 .banner-text strong{color:#831843}
-.b3 .banner-text strong{color:#0c4a6e}
-.b1 .banner-text span,.b2 .banner-text span,.b3 .banner-text span{font-size:11px}
-.b1 .banner-text span{color:#92400e}
-.b2 .banner-text span{color:#9d174d}
-.b3 .banner-text span{color:#075985}
-.banner-pill{margin-top:10px;display:inline-block;background:rgba(255,255,255,0.45);border-radius:100px;padding:5px 12px;font-size:11px;font-weight:800;cursor:pointer}
-.b1 .banner-pill{color:#78350f}
-.b2 .banner-pill{color:#831843}
-.b3 .banner-pill{color:#0c4a6e}
-.banner-emoji{font-size:54px;line-height:1}
-.dots{display:flex;justify-content:center;gap:6px;margin-top:10px}
-.dot{width:6px;height:6px;border-radius:50%;background:#bae6fd;transition:all 0.3s}
-.dot.on{background:#0ea5e9;width:16px;border-radius:100px}
-.flash{margin:14px 18px 0;background:linear-gradient(135deg,#0ea5e9,#0284c7);border-radius:16px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
-.flash-left{display:flex;align-items:center;gap:10px}
-.flash-left span{font-size:22px}
-.flash-label{font-size:12px;font-weight:900;color:white}
-.flash-sub{font-size:10px;color:rgba(255,255,255,0.75)}
-.timer{display:flex;gap:4px}
-.tblock{background:rgba(255,255,255,0.2);border-radius:8px;padding:4px 8px;font-size:13px;font-weight:900;color:white;min-width:32px;text-align:center}
-.tsep{color:rgba(255,255,255,0.6);font-weight:900;font-size:13px;align-self:center}
-.sec-title{font-size:14px;font-weight:900;color:#0c4a6e;padding:16px 18px 10px}
-.cats{display:flex;gap:8px;padding:0 18px;overflow-x:auto;scrollbar-width:none}
+html,body{height:100%;overflow:hidden;background:var(--bg)}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);max-width:430px;margin:0 auto}
+.app{height:100vh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg)}
+.scr{flex:1;overflow-y:auto;overflow-x:hidden;padding-bottom:84px;scrollbar-width:none;background:var(--bg2)}
+.scr::-webkit-scrollbar{display:none}
+
+/* ── HEADER ── */
+.header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px 12px;
+  background:var(--bg);flex-shrink:0;
+  border-bottom:1px solid var(--line);
+}
+.logo{display:flex;align-items:center;gap:8px}
+.logo-emoji{font-size:22px;line-height:1}
+.logo-name{font-size:17px;font-weight:800;color:var(--text);letter-spacing:-0.4px}
+.logo-name b{color:var(--accent)}
+.hbtns{display:flex;gap:6px}
+.hbtn{
+  width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;position:relative;border-radius:50%;
+  transition:background 0.15s;
+}
+.hbtn:active{background:var(--surface)}
+.hbtn svg{width:22px;height:22px;fill:none;stroke:var(--muted);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.hbadge{
+  position:absolute;top:2px;right:2px;
+  background:var(--accent2);color:#fff;
+  font-size:8px;font-weight:800;
+  width:15px;height:15px;border-radius:50%;
+  display:none;align-items:center;justify-content:center;
+}
+
+/* ── SEARCH ── */
+.swrap{padding:8px 16px 10px;background:var(--bg);border-bottom:1px solid var(--line);flex-shrink:0}
+.sbox{
+  background:var(--surface);border-radius:12px;
+  padding:9px 14px;display:flex;align-items:center;gap:8px;
+  color:var(--muted);font-size:13px;cursor:pointer;
+}
+.sbox svg{width:15px;height:15px;fill:none;stroke:var(--muted);stroke-width:1.8;flex-shrink:0}
+
+/* ── BANNERS ── */
+.bwrap{padding:14px 16px 0}
+.bscroll{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x mandatory}
+.bscroll::-webkit-scrollbar{display:none}
+.bcard{
+  min-width:100%;border-radius:20px;
+  padding:20px 18px;
+  display:flex;align-items:center;justify-content:space-between;
+  scroll-snap-align:start;flex-shrink:0;
+  position:relative;overflow:hidden;cursor:pointer;
+}
+.bc1{background:linear-gradient(145deg,#0a6b5e,#053d35)}
+.bc2{background:linear-gradient(145deg,#5a4a9a,#2e1f6e)}
+.bc3{background:linear-gradient(145deg,#b03030,#6e1515)}
+.bcard::after{content:'';position:absolute;top:-50px;right:-30px;width:140px;height:140px;background:rgba(255,255,255,0.07);border-radius:50%}
+.btag{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:rgba(255,255,255,0.18);border-radius:100px;padding:3px 10px;color:rgba(255,255,255,0.9);display:inline-block;margin-bottom:8px}
+.btitle{font-size:16px;font-weight:900;color:#fff;line-height:1.25;margin-bottom:5px;max-width:170px}
+.bsub{font-size:11px;color:rgba(255,255,255,0.6);margin-bottom:12px}
+.bbtn{display:inline-block;background:#fff;font-size:11px;font-weight:800;border-radius:100px;padding:6px 16px}
+.bc1 .bbtn{color:#053d35}.bc2 .bbtn{color:#2e1f6e}.bc3 .bbtn{color:#6e1515}
+.bart{font-size:56px;line-height:1;flex-shrink:0;z-index:1}
+.dots{display:flex;justify-content:center;gap:5px;padding:10px 0 2px}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--muted);opacity:0.3;transition:all 0.3s}
+.dot.on{background:var(--accent);width:16px;border-radius:100px;opacity:1}
+
+/* ── FLASH ── */
+.flash{
+  margin:12px 16px 0;
+  background:#fff;border:1px solid var(--line);
+  border-radius:16px;padding:12px 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 1px 4px rgba(0,0,0,0.04);
+}
+.fl{display:flex;align-items:center;gap:10px}
+.fdot{width:8px;height:8px;border-radius:50%;background:#e53935;box-shadow:0 0 0 0 rgba(229,57,53,0.4);animation:pulse 1.5s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(229,57,53,0.4)}70%{box-shadow:0 0 0 8px rgba(229,57,53,0)}100%{box-shadow:0 0 0 0 rgba(229,57,53,0)}}
+.ft{font-size:12px;font-weight:800;color:var(--text)}
+.fs{font-size:10px;color:var(--muted);margin-top:1px}
+.timer{display:flex;align-items:center;gap:3px}
+.tb{background:var(--text);border-radius:8px;padding:5px 8px;font-size:14px;font-weight:900;color:#fff;min-width:34px;text-align:center;font-variant-numeric:tabular-nums}
+.tsep{font-size:13px;font-weight:800;color:var(--muted)}
+
+/* ── SECTION ── */
+.sec{display:flex;align-items:center;justify-content:space-between;padding:16px 16px 10px}
+.sec-t{font-size:15px;font-weight:900;color:var(--text);letter-spacing:-0.3px}
+.sec-a{font-size:13px;font-weight:600;color:var(--accent)}
+
+/* ── CATS ── */
+.cats{display:flex;gap:8px;padding:0 16px 2px;overflow-x:auto;scrollbar-width:none}
 .cats::-webkit-scrollbar{display:none}
-.cat{flex-shrink:0;background:white;border:1.5px solid #e0f2fe;border-radius:100px;padding:7px 16px;font-size:12px;font-weight:800;color:#0c4a6e;cursor:pointer;transition:all 0.2s;white-space:nowrap}
-.cat.on{background:#0ea5e9;color:white;border-color:#0ea5e9}
-.products{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:4px 18px 100px}
-.pcard{background:white;border-radius:20px;border:0.5px solid #e0f2fe;overflow:hidden;cursor:pointer;transition:transform 0.15s}
+.cat{flex-shrink:0;background:#fff;border:1.5px solid var(--line);border-radius:100px;padding:7px 18px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;transition:all 0.2s;white-space:nowrap}
+.cat.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* ── PRODUCTS ── */
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:4px 16px 8px}
+.pcard{background:#fff;border-radius:18px;overflow:hidden;cursor:pointer;transition:transform 0.15s;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
 .pcard:active{transform:scale(0.97)}
-.pimg{height:110px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative}
-.pimg-1{background:linear-gradient(135deg,#fef9c3,#fde68a)}
-.pimg-2{background:linear-gradient(135deg,#fce7f3,#fbcfe8)}
-.pimg-3{background:linear-gradient(135deg,#e0f2fe,#bae6fd)}
-.pimg-4{background:linear-gradient(135deg,#dcfce7,#bbf7d0)}
-.pimg-5{background:linear-gradient(135deg,#ede9fe,#ddd6fe)}
-.pimg-6{background:linear-gradient(135deg,#fff7ed,#fed7aa)}
-.pbadge{position:absolute;top:8px;left:8px;font-size:8px;font-weight:900;padding:3px 8px;border-radius:100px}
-.pbadge.hit{background:#0ea5e9;color:white}
-.pbadge.new{background:#fb7185;color:white}
-.pbadge.sale{background:#fbbf24;color:#78350f}
-.pheart{position:absolute;top:8px;right:8px;font-size:16px;cursor:pointer}
-.pinfo{padding:10px 12px 12px}
-.pname{font-size:12px;font-weight:800;color:#0c4a6e;margin-bottom:3px;line-height:1.3}
-.prate{font-size:10px;color:#f59e0b;margin-bottom:6px}
-.pprice{font-size:14px;font-weight:900;color:#0284c7;margin-bottom:8px}
-.pprice small{font-size:9px;font-weight:600;color:#7dd3fc}
-.pold{font-size:10px;color:#94a3b8;text-decoration:line-through;margin-bottom:8px}
-.padd{width:100%;background:linear-gradient(135deg,#38bdf8,#0284c7);border:none;border-radius:10px;padding:8px;color:white;font-size:11px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:5px;transition:all 0.2s}
-.padd.added{background:linear-gradient(135deg,#4ade80,#16a34a)}
-.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:white;border-top:0.5px solid #e0f2fe;display:flex;padding:10px 0 14px;box-shadow:0 -4px 20px rgba(14,165,233,0.08);z-index:10}
-.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;font-size:9px;font-weight:800;color:#94a3b8;transition:color 0.2s;position:relative}
-.ni.on{color:#0ea5e9}
-.ni .nicon{font-size:22px}
-.ni .nbadge{position:absolute;top:0;right:18px;background:#fb7185;color:white;font-size:8px;font-weight:900;width:14px;height:14px;border-radius:50%;display:none;align-items:center;justify-content:center}
-.sheet-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.35);z-index:50;display:none;align-items:flex-end;justify-content:center}
-.sheet-overlay.open{display:flex}
-.sheet{background:white;width:100%;max-width:430px;border-radius:24px 24px 0 0;padding:20px 18px 32px;max-height:75%;overflow-y:auto}
+.pimg{height:115px;display:flex;align-items:center;justify-content:center;font-size:50px;position:relative}
+.pi1{background:var(--pi1)}.pi2{background:var(--pi2)}.pi3{background:var(--pi3)}
+.pi4{background:var(--pi4)}.pi5{background:var(--pi5)}.pi6{background:var(--pi6)}
+.pbadge{position:absolute;top:8px;left:8px;font-size:8px;font-weight:800;padding:3px 8px;border-radius:100px;text-transform:uppercase;letter-spacing:0.3px}
+.bHIT{background:var(--accent);color:#fff}.bNEW{background:#e53935;color:#fff}.bSALE{background:#f9a825;color:#fff}
+.pfav{position:absolute;top:8px;right:8px;width:28px;height:28px;background:rgba(255,255,255,0.85);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.1)}
+.pinfo{padding:10px 12px 12px;background:#fff}
+.pname{font-size:12px;font-weight:800;color:var(--text);margin-bottom:2px;line-height:1.35}
+.prate{font-size:10px;color:#f9a825;margin-bottom:4px;letter-spacing:0.5px}
+.pold{font-size:10px;color:var(--muted);text-decoration:line-through;margin-bottom:3px}
+.pprice{font-size:14px;font-weight:900;color:var(--accent);margin-bottom:8px}
+.pprice small{font-size:9px;font-weight:600;color:var(--muted)}
+.padd{width:100%;background:rgba(18,140,126,0.08);border:1.5px solid rgba(18,140,126,0.2);border-radius:10px;padding:8px;color:var(--accent);font-size:11px;font-weight:800;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.padd.added{background:rgba(18,140,126,0.12);border-color:var(--accent)}
+
+/* ── BOTTOM NAV (Telegram/Apple uslubi) ── */
+.nav{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:430px;
+  background:var(--bg);
+  border-top:1px solid var(--line);
+  display:flex;padding:8px 0 16px;z-index:20;
+}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;font-size:10px;font-weight:600;color:var(--muted);transition:color 0.2s;position:relative}
+.ni.on{color:var(--accent)}
+/* Apple/Telegram uslubi ikonkalar */
+.ni-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center}
+.ni-icon svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:stroke 0.2s}
+.ni.on .ni-icon svg{stroke:var(--accent)}
+.ni-badge{position:absolute;top:0;right:18%;background:#e53935;color:#fff;font-size:8px;font-weight:800;width:14px;height:14px;border-radius:50%;display:none;align-items:center;justify-content:center}
+
+/* ── OVERLAY ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:50;display:none;align-items:flex-end;justify-content:center}
+.overlay.open{display:flex}
+.sheet{background:var(--bg);width:100%;max-width:430px;border-radius:22px 22px 0 0;padding:18px 16px 34px;max-height:78%;overflow-y:auto;border-top:1px solid var(--line)}
 .sheet::-webkit-scrollbar{display:none}
-.shandle{width:36px;height:4px;background:#e2e8f0;border-radius:100px;margin:0 auto 18px}
-.stitle{font-size:16px;font-weight:900;color:#0c4a6e;margin-bottom:14px}
-.citem{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:0.5px solid #f0f9ff}
+.shandle{width:36px;height:4px;background:var(--line);border-radius:100px;margin:0 auto 18px}
+.stitle{font-size:17px;font-weight:900;color:var(--text);margin-bottom:14px}
+.citem{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
 .cemoji{font-size:28px}
-.cname{font-size:13px;font-weight:700;color:#0c4a6e;flex:1}
+.cname{font-size:13px;font-weight:700;color:var(--text);flex:1}
 .cqty{display:flex;align-items:center;gap:8px}
-.qbtn{background:#e0f2fe;border:none;border-radius:8px;width:26px;height:26px;font-size:16px;font-weight:900;color:#0284c7;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center}
-.qnum{font-size:13px;font-weight:800;color:#0c4a6e;min-width:16px;text-align:center}
-.cprice{font-size:13px;font-weight:900;color:#0284c7}
-.ctotal{display:flex;justify-content:space-between;padding:14px 0 0;font-size:14px;font-weight:900;color:#0c4a6e}
-.cbtn{width:100%;margin-top:14px;background:linear-gradient(135deg,#38bdf8,#0284c7);border:none;border-radius:14px;padding:15px;color:white;font-size:14px;font-weight:900;cursor:pointer;font-family:inherit}
-.cempty{text-align:center;padding:30px;color:#94a3b8;font-size:13px}
-.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#0c4a6e;color:white;padding:10px 20px;border-radius:100px;font-size:12px;font-weight:800;z-index:100;opacity:0;transition:opacity 0.3s;white-space:nowrap}
+.qbtn{background:var(--surface);border:1.5px solid var(--line);border-radius:50%;width:28px;height:28px;font-size:16px;font-weight:800;color:var(--accent);cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center}
+.qnum{font-size:14px;font-weight:800;color:var(--text);min-width:18px;text-align:center}
+.cprice{font-size:13px;font-weight:800;color:var(--accent)}
+.ctotal{display:flex;justify-content:space-between;padding:14px 0 0;font-size:15px;font-weight:900;color:var(--text)}
+.cbtn{width:100%;margin-top:14px;background:var(--accent);border:none;border-radius:14px;padding:15px;color:#fff;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit}
+.cempty{text-align:center;padding:32px;color:var(--muted);font-size:13px}
+
+/* ── PROFILE ── */
+.prof-hd{background:var(--bg);border-bottom:1px solid var(--line);padding:28px 16px;text-align:center}
+.avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.avatar svg{width:34px;height:34px;stroke:#fff;fill:none;stroke-width:1.5}
+.uname{font-size:17px;font-weight:900;color:var(--text)}
+.utag{font-size:12px;color:var(--muted);margin-top:3px}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:14px 16px}
+.scard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+.snum{font-size:18px;font-weight:900;color:var(--accent)}
+.slbl{font-size:10px;color:var(--muted);font-weight:600;margin-top:2px}
+
+/* Mitem — Apple Settings uslubi */
+.mitem{display:flex;align-items:center;gap:12px;padding:13px 14px;background:#fff;border-radius:14px;margin:0 16px 8px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+.micon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.micon svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.mi1{background:var(--accent)}.mi2{background:#e53935}.mi3{background:#f9a825}.mi4{background:#5a4a9a}
+.mlbl{font-size:13px;font-weight:700;color:var(--text);flex:1}
+.marr svg{width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2.5;opacity:0.5}
+
+/* HISTORY */
+.hitem{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin:0 16px 10px;box-shadow:0 1px 4px rgba(0,0,0,0.04)}
+.hrow{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.hid{font-size:12px;font-weight:800;color:var(--text)}
+.hst{font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px}
+.hok{background:rgba(37,211,102,0.12);color:var(--accent)}.hwt{background:rgba(249,168,37,0.12);color:#c07800}
+.hdate{font-size:11px;color:var(--muted);margin-bottom:6px}
+.hitms{font-size:12px;color:var(--text);font-weight:600;margin-bottom:6px}
+.htotal{font-size:13px;font-weight:900;color:var(--accent)}
+
+/* SET */
+.set-lbl{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;padding:0 16px;margin-bottom:6px}
+.fav-empty{text-align:center;padding:50px 20px;color:var(--muted);font-size:13px;line-height:1.8}
+
+/* TOAST */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:rgba(17,27,33,0.92);color:#fff;padding:10px 20px;border-radius:100px;font-size:12px;font-weight:700;z-index:100;opacity:0;transition:opacity 0.3s;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,0.2)}
 .toast.show{opacity:1}
 </style>
 </head>
 <body>
+<div class="app">
 
-<div class="header">
-  <div class="header-top">
-    <div class="logo">Aqlli<em>Bekat</em> ☀️</div>
-    <div class="header-icons">
-      <button class="icon-btn" onclick="openCart()">
-        🛒
-        <div class="badge" id="cartBadge">0</div>
-      </button>
+<!-- HOME -->
+<div id="home" style="display:flex;flex-direction:column;flex:1;overflow:hidden">
+  <div class="header">
+    <div class="logo">
+      <span class="logo-emoji">🛒</span>
+      <div class="logo-name">Aqlli<b>Bekat</b></div>
     </div>
-  </div>
-  <div class="search" onclick="showToast('Qidiruv tez orada!')">
-    🔍 Mahsulot qidiring...
-  </div>
-</div>
-
-<div class="banners">
-  <div class="banner-track" id="bannerTrack">
-    <div class="banner-card b1">
-      <div class="banner-text">
-        <strong>Yozgi chegirmalar! 🌊</strong>
-        <span>Barcha mahsulotlarda 20% off</span>
-        <div class="banner-pill">Hozir ko'ring →</div>
+    <div class="hbtns">
+      <div class="hbtn" onclick="showToast('Qidiruv tez orada!')">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       </div>
-      <div class="banner-emoji">🏖️</div>
-    </div>
-    <div class="banner-card b2">
-      <div class="banner-text">
-        <strong>Yangi kolleksiya 💅</strong>
-        <span>Premium mahsulotlar keldi</span>
-        <div class="banner-pill">Ko'proq →</div>
+      <div class="hbtn" onclick="openCart()">
+        <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <div class="hbadge" id="cartBadge">0</div>
       </div>
-      <div class="banner-emoji">🌸</div>
     </div>
-    <div class="banner-card b3">
-      <div class="banner-text">
-        <strong>Tekin yetkazish 🚀</strong>
-        <span>100 000 so'mdan yuqori</span>
-        <div class="banner-pill">Buyurtma →</div>
+  </div>
+  <div class="swrap">
+    <div class="sbox" onclick="showToast('Qidiruv tez orada!')">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      Mahsulot yoki kategoriya qidiring...
+    </div>
+  </div>
+  <div class="scr">
+    <div class="bwrap">
+      <div class="bscroll" id="bannerScroll">
+        <div class="bcard bc1"><div><div class="btag">Yozgi taklif</div><div class="btitle">Barcha mahsulotlarda 20% chegirma</div><div class="bsub">Faqat bugun va ertaga</div><div class="bbtn">Ko'rish →</div></div><div class="bart">🛍️</div></div>
+        <div class="bcard bc2"><div><div class="btag">Yangi kolleksiya</div><div class="btitle">Premium mahsulotlar sizni kutmoqda</div><div class="bsub">Har kuni yangi tovarlar</div><div class="bbtn">Ko'rish →</div></div><div class="bart">✨</div></div>
+        <div class="bcard bc3"><div><div class="btag">Maxsus taklif</div><div class="btitle">100 000 so'mdan tekin yetkazish</div><div class="bsub">Toshkent bo'ylab yetkazamiz</div><div class="bbtn">Buyurtma →</div></div><div class="bart">🚀</div></div>
       </div>
-      <div class="banner-emoji">📦</div>
+      <div class="dots"><div class="dot on" id="d0"></div><div class="dot" id="d1"></div><div class="dot" id="d2"></div></div>
     </div>
-  </div>
-  <div class="dots">
-    <div class="dot on" id="d0"></div>
-    <div class="dot" id="d1"></div>
-    <div class="dot" id="d2"></div>
-  </div>
-</div>
-
-<div class="flash">
-  <div class="flash-left">
-    <span>⚡</span>
-    <div>
-      <div class="flash-label">Flash Deal</div>
-      <div class="flash-sub">Chegirma tugashiga</div>
+    <div class="flash">
+      <div class="fl"><div class="fdot"></div><div><div class="ft">Flash Deal</div><div class="fs">Chegirma tugashiga qoldi</div></div></div>
+      <div class="timer"><div class="tb" id="th">02</div><div class="tsep">:</div><div class="tb" id="tm">34</div><div class="tsep">:</div><div class="tb" id="ts">59</div></div>
     </div>
-  </div>
-  <div class="timer">
-    <div class="tblock" id="th">02</div>
-    <div class="tsep">:</div>
-    <div class="tblock" id="tm">34</div>
-    <div class="tsep">:</div>
-    <div class="tblock" id="ts">59</div>
+    <div class="sec"><div class="sec-t">Kategoriyalar</div></div>
+    <div class="cats">
+      <div class="cat on" onclick="filterCat(this,'all')">Hammasi</div>
+      <div class="cat" onclick="filterCat(this,'summer')">Yoz</div>
+      <div class="cat" onclick="filterCat(this,'tech')">Texnika</div>
+      <div class="cat" onclick="filterCat(this,'beauty')">Go'zallik</div>
+      <div class="cat" onclick="filterCat(this,'home')">Uy</div>
+      <div class="cat" onclick="filterCat(this,'sport')">Sport</div>
+    </div>
+    <div class="sec"><div class="sec-t">Trending mahsulotlar</div><div class="sec-a">Barchasi</div></div>
+    <div class="pgrid" id="pgrid"></div>
   </div>
 </div>
 
-<div class="sec-title">Kategoriyalar</div>
-<div class="cats">
-  <div class="cat on" onclick="filterCat(this,'all')">Hammasi</div>
-  <div class="cat" onclick="filterCat(this,'summer')">☀️ Yoz</div>
-  <div class="cat" onclick="filterCat(this,'tech')">💻 Texnika</div>
-  <div class="cat" onclick="filterCat(this,'beauty')">💄 Go'zallik</div>
-  <div class="cat" onclick="filterCat(this,'home')">🏠 Uy</div>
-  <div class="cat" onclick="filterCat(this,'sport')">🏃 Sport</div>
+<!-- FAVORITES -->
+<div id="favScreen" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+  <div class="header"><div class="logo"><span class="logo-emoji">🛒</span><div class="logo-name">Aqlli<b>Bekat</b></div></div><div style="font-size:13px;font-weight:700;color:var(--muted)">Yoqqanlar</div></div>
+  <div class="scr"><div class="sec"><div class="sec-t">Yoqqan mahsulotlar</div></div><div class="pgrid" id="favGrid"></div><div id="favEmpty" class="fav-empty" style="display:none">Hali yoqqan mahsulot yo'q<br>Yurakchani bosib saqlang</div></div>
 </div>
 
-<div class="sec-title">Trending mahsulotlar 🔥</div>
-<div class="products" id="prodGrid"></div>
+<!-- HISTORY -->
+<div id="histScreen" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+  <div class="header"><div class="logo"><span class="logo-emoji">🛒</span><div class="logo-name">Aqlli<b>Bekat</b></div></div><div style="font-size:13px;font-weight:700;color:var(--muted)">Tarix</div></div>
+  <div class="scr">
+    <div class="sec"><div class="sec-t">Buyurtmalar tarixi</div></div>
+    <div class="hitem"><div class="hrow"><div class="hid">#AB-1042</div><div class="hst hok">Yetkazildi</div></div><div class="hdate">15 iyun 2025 · 14:32</div><div class="hitms">Mini Ventilyator, Juicer Blender</div><div class="htotal">128 000 so'm</div></div>
+    <div class="hitem"><div class="hrow"><div class="hid">#AB-1038</div><div class="hst hwt">Yo'lda</div></div><div class="hdate">12 iyun 2025 · 09:15</div><div class="hitms">Water Gun Pro, Meva Saqlagich</div><div class="htotal">148 000 so'm</div></div>
+    <div class="hitem"><div class="hrow"><div class="hid">#AB-1031</div><div class="hst hok">Yetkazildi</div></div><div class="hdate">5 iyun 2025 · 11:00</div><div class="hitms">Mini Konditsioner</div><div class="htotal">79 000 so'm</div></div>
+  </div>
+</div>
 
+<!-- PROFILE -->
+<div id="profileScreen" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+  <div class="scr">
+    <div class="prof-hd"><div class="avatar"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="uname">Foydalanuvchi</div><div class="utag">@aqlli_bekat</div></div>
+    <div class="stats"><div class="scard"><div class="snum">3</div><div class="slbl">Buyurtma</div></div><div class="scard"><div class="snum">5</div><div class="slbl">Yoqqan</div></div><div class="scard"><div class="snum">355K</div><div class="slbl">Sarflangan</div></div></div>
+    <div class="mitem"><div class="micon mi1"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><div class="mlbl">Buyurtmalarim</div><div class="marr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+    <div class="mitem"><div class="micon mi2"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><div class="mlbl">Yoqqanlar</div><div class="marr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+    <div class="mitem"><div class="micon mi3"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="mlbl">Manzillarim</div><div class="marr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+    <div class="mitem" onclick="showToast('Support: @aqllbekat_admin')"><div class="micon mi4"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="mlbl">Qo'llab-quvvatlash</div><div class="marr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="settScreen" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+  <div class="header"><div class="logo"><span class="logo-emoji">🛒</span><div class="logo-name">Aqlli<b>Bekat</b></div></div><div style="font-size:13px;font-weight:700;color:var(--muted)">Sozlamalar</div></div>
+  <div class="scr">
+    <div class="sec"><div class="sec-t">Sozlamalar</div></div>
+    <div style="margin-bottom:6px"><div class="set-lbl">Ilova</div></div>
+    <div class="mitem" onclick="showToast('Til: O\'zbekcha')"><div class="micon mi1"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="mlbl">Til: O'zbekcha</div><div class="marr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+    <div class="mitem" onclick="showToast('Bildirishnomalar')"><div class="micon mi3"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div><div class="mlbl">Bildirishnomalar</div><div class="marr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+    <div style="margin:14px 0 6px"><div class="set-lbl">Yordam</div></div>
+    <div class="mitem" onclick="showToast('Support: @aqllbekat_admin')"><div class="micon mi4"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="mlbl">Support bilan yozish</div><div class="marr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+    <div class="mitem" onclick="showToast('Aqlli Bekat v1.0.0')"><div class="micon" style="background:#8e8e93"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="mlbl">Ilova haqida</div><div class="marr"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div></div>
+  </div>
+</div>
+
+<!-- ═══ TELEGRAM/APPLE USLUBI BOTTOM NAV ═══ -->
 <div class="nav">
-  <div class="ni on" id="n0" onclick="showToast('Bosh sahifa')"><div class="nicon">🏠</div>Bosh sahifa</div>
-  <div class="ni" id="n1" onclick="openCart()"><div class="nicon">🛒</div>Savatcha<div class="nbadge" id="navBadge">0</div></div>
-  <div class="ni" id="n2" onclick="showToast('Tarix tez orada!')"><div class="nicon">📦</div>Tarix</div>
-  <div class="ni" id="n3" onclick="showToast('Yoqqanlar!')"><div class="nicon">❤️</div>Yoqqanlar</div>
-  <div class="ni" id="n4" onclick="showToast('Sozlamalar!')"><div class="nicon">⚙️</div>Sozlamalar</div>
+  <div class="ni on" id="n0" onclick="goTab(0)">
+    <div class="ni-icon">
+      <!-- Home - Apple uslubi -->
+      <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+    </div>
+    Bosh sahifa
+  </div>
+  <div class="ni" id="n1" onclick="openCart()">
+    <div class="ni-icon">
+      <!-- Cart - Apple uslubi -->
+      <svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    </div>
+    Savatcha
+    <div class="ni-badge" id="navBadge">0</div>
+  </div>
+  <div class="ni" id="n2" onclick="goTab(2)">
+    <div class="ni-icon">
+      <!-- Clock / History - Apple uslubi -->
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    </div>
+    Tarix
+  </div>
+  <div class="ni" id="n3" onclick="goTab(3)">
+    <div class="ni-icon">
+      <!-- Heart - Apple uslubi -->
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    </div>
+    Yoqqanlar
+  </div>
+  <div class="ni" id="n4" onclick="goTab(4)">
+    <div class="ni-icon">
+      <!-- Person / Profile - Apple uslubi -->
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    Profil
+  </div>
+</div>
 </div>
 
-<div class="sheet-overlay" id="cartOverlay" onclick="closeCartOut(event)">
+<!-- CART -->
+<div class="overlay" id="cartOverlay" onclick="closeCartOut(event)">
   <div class="sheet">
     <div class="shandle"></div>
-    <div class="stitle">🛒 Mening savatim</div>
+    <div class="stitle">Savatcha</div>
     <div id="cartItems"></div>
     <div id="cartTotal"></div>
-    <button class="cbtn" id="cbtn" style="display:none" onclick="checkout()">Buyurtma berish →</button>
+    <button class="cbtn" id="cbtn" style="display:none" onclick="checkout()">Buyurtma berish</button>
   </div>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
-const PRODUCTS=[
-  {id:1,name:'Water Gun Pro',price:119000,old:149000,emoji:'🔫',cat:'summer',badge:'hit',img:'pimg-1',rating:'★★★★★'},
-  {id:2,name:'Mini Ventilyator',price:59000,old:null,emoji:'🌀',cat:'tech',badge:'new',img:'pimg-2',rating:'★★★★☆'},
-  {id:3,name:'Mini Konditsioner',price:79000,old:99000,emoji:'❄️',cat:'tech',badge:null,img:'pimg-3',rating:'★★★★★'},
-  {id:4,name:'Juicer Blender',price:69000,old:null,emoji:'🥤',cat:'home',badge:'sale',img:'pimg-4',rating:'★★★☆☆'},
-  {id:5,name:'Meva Saqlagich',price:29000,old:null,emoji:'🍎',cat:'home',badge:null,img:'pimg-5',rating:'★★★★☆'},
-  {id:6,name:'Sport Sumka',price:89000,old:120000,emoji:'🎒',cat:'sport',badge:'hit',img:'pimg-6',rating:'★★★★★'},
+const P=[
+  {id:1,name:'Water Gun Pro',price:119000,old:149000,emoji:'🔫',cat:'summer',badge:'HIT',pi:'pi1',rate:'★★★★★'},
+  {id:2,name:'Mini Ventilyator',price:59000,old:null,emoji:'🌀',cat:'tech',badge:'NEW',pi:'pi2',rate:'★★★★☆'},
+  {id:3,name:'Mini Konditsioner',price:79000,old:99000,emoji:'❄️',cat:'tech',badge:null,pi:'pi3',rate:'★★★★★'},
+  {id:4,name:'Juicer Blender',price:69000,old:null,emoji:'🥤',cat:'home',badge:'SALE',pi:'pi4',rate:'★★★☆☆'},
+  {id:5,name:'Meva Saqlagich',price:29000,old:null,emoji:'🍎',cat:'home',badge:null,pi:'pi5',rate:'★★★★☆'},
+  {id:6,name:'Sport Sumka',price:89000,old:120000,emoji:'🎒',cat:'sport',badge:'HIT',pi:'pi6',rate:'★★★★★'},
 ];
-let cart=[],favs=[],curCat='all';
+let cart=[],favs=[],curCat='all',curTab=0;
 
-function renderProducts(cat){
-  const list=cat==='all'?PRODUCTS:PRODUCTS.filter(p=>p.cat===cat);
-  document.getElementById('prodGrid').innerHTML=list.map(p=>`
-    <div class="pcard">
-      <div class="pimg ${p.img}">
-        ${p.emoji}
-        ${p.badge?`<div class="pbadge ${p.badge}">${p.badge.toUpperCase()}</div>`:''}
-        <div class="pheart" onclick="toggleFav(${p.id})">${favs.includes(p.id)?'❤️':'🤍'}</div>
-      </div>
-      <div class="pinfo">
-        <div class="pname">${p.name}</div>
-        <div class="prate">${p.rating}</div>
-        ${p.old?`<div class="pold">${p.old.toLocaleString()} so'm</div>`:''}
-        <div class="pprice">${p.price.toLocaleString()} <small>so'm</small></div>
-        <button class="padd ${cart.find(c=>c.id===p.id)?'added':''}" onclick="addCart(${p.id})">
-          ${cart.find(c=>c.id===p.id)?'✅ Qo\'shildi':'🛒 Savatga'}
-        </button>
-      </div>
-    </div>
-  `).join('');
+function card(p){
+  return`<div class="pcard"><div class="pimg ${p.pi}">${p.emoji}${p.badge?`<div class="pbadge b${p.badge}">${p.badge}</div>`:''}<div class="pfav" onclick="toggleFav(${p.id},event)">${favs.includes(p.id)?'❤️':'🤍'}</div></div><div class="pinfo"><div class="pname">${p.name}</div><div class="prate">${p.rate}</div>${p.old?`<div class="pold">${p.old.toLocaleString()} so'm</div>`:''}<div class="pprice">${p.price.toLocaleString()} <small>so'm</small></div><button class="padd ${cart.find(c=>c.id===p.id)?'added':''}" onclick="addCart(${p.id})">${cart.find(c=>c.id===p.id)?'Qo\'shildi':'+ Savatga'}</button></div></div>`;
 }
-
-function toggleFav(id){
-  favs.includes(id)?favs=favs.filter(f=>f!==id):favs.push(id);
-  showToast(favs.includes(id)?'💖 Yoqqanlarga qo\'shildi!':'Olib tashlandi');
-  renderProducts(curCat);
-}
-
-function filterCat(el,cat){
-  curCat=cat;
-  document.querySelectorAll('.cat').forEach(c=>c.classList.remove('on'));
-  el.classList.add('on');
-  renderProducts(cat);
-}
-
-function addCart(id){
-  const p=PRODUCTS.find(x=>x.id===id);
-  const ex=cart.find(c=>c.id===id);
-  ex?ex.qty++:cart.push({...p,qty:1});
-  updateCartUI();
-  renderProducts(curCat);
-  showToast('🛒 Savatga qo\'shildi!');
-}
-
-function updateCartUI(){
-  const total=cart.reduce((s,i)=>s+i.qty,0);
-  const b=document.getElementById('cartBadge');
-  const nb=document.getElementById('navBadge');
-  b.style.display=nb.style.display=total>0?'flex':'none';
-  b.textContent=nb.textContent=total;
-}
-
-function openCart(){
-  document.getElementById('cartOverlay').classList.add('open');
-  renderCart();
-}
-
-function closeCartOut(e){
-  if(e.target===document.getElementById('cartOverlay'))
-    document.getElementById('cartOverlay').classList.remove('open');
-}
-
+function renderP(cat){const list=cat==='all'?P:P.filter(p=>p.cat===cat);document.getElementById('pgrid').innerHTML=list.map(card).join('')}
+function renderFavs(){const g=document.getElementById('favGrid'),e=document.getElementById('favEmpty'),list=P.filter(p=>favs.includes(p.id));if(!list.length){g.innerHTML='';e.style.display='block';return}e.style.display='none';g.innerHTML=list.map(card).join('')}
+function toggleFav(id,e){e.stopPropagation();favs.includes(id)?favs=favs.filter(f=>f!==id):favs.push(id);showToast(favs.includes(id)?'Yoqqanlarga qo\'shildi':'Olib tashlandi');renderP(curCat);if(curTab===3)renderFavs()}
+function filterCat(el,cat){curCat=cat;document.querySelectorAll('.cat').forEach(c=>c.classList.remove('on'));el.classList.add('on');renderP(cat)}
+function addCart(id){const p=P.find(x=>x.id===id),ex=cart.find(c=>c.id===id);ex?ex.qty++:cart.push({...p,qty:1});updateBadge();renderP(curCat);if(curTab===3)renderFavs();showToast('Savatga qo\'shildi')}
+function updateBadge(){const t=cart.reduce((s,i)=>s+i.qty,0);const b=document.getElementById('cartBadge'),nb=document.getElementById('navBadge');b.style.display=nb.style.display=t>0?'flex':'none';b.textContent=nb.textContent=t}
+function openCart(){document.getElementById('cartOverlay').classList.add('open');renderCart()}
+function closeCartOut(e){if(e.target===document.getElementById('cartOverlay'))document.getElementById('cartOverlay').classList.remove('open')}
 function renderCart(){
-  const c=document.getElementById('cartItems');
-  const t=document.getElementById('cartTotal');
-  const b=document.getElementById('cbtn');
-  if(cart.length===0){
-    c.innerHTML='<div class="cempty">🛒 Savat bo\'sh<br>Mahsulot qo\'shing!</div>';
-    t.innerHTML='';b.style.display='none';return;
-  }
-  c.innerHTML=cart.map(i=>`
-    <div class="citem">
-      <div class="cemoji">${i.emoji}</div>
-      <div class="cname">${i.name}</div>
-      <div class="cqty">
-        <button class="qbtn" onclick="changeQty(${i.id},-1)">−</button>
-        <div class="qnum">${i.qty}</div>
-        <button class="qbtn" onclick="changeQty(${i.id},1)">+</button>
-      </div>
-      <div class="cprice">${(i.price*i.qty).toLocaleString()}</div>
-    </div>
-  `).join('');
-  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
-  t.innerHTML=`<div class="ctotal"><span>Jami:</span><span>${total.toLocaleString()} so'm</span></div>`;
-  b.style.display='block';
+  const c=document.getElementById('cartItems'),t=document.getElementById('cartTotal'),b=document.getElementById('cbtn');
+  if(!cart.length){c.innerHTML='<div class="cempty">Savat bo\'sh<br>Mahsulot qo\'shing!</div>';t.innerHTML='';b.style.display='none';return}
+  c.innerHTML=cart.map(i=>`<div class="citem"><div class="cemoji">${i.emoji}</div><div class="cname">${i.name}</div><div class="cqty"><button class="qbtn" onclick="chQty(${i.id},-1)">−</button><div class="qnum">${i.qty}</div><button class="qbtn" onclick="chQty(${i.id},1)">+</button></div><div class="cprice">${(i.price*i.qty).toLocaleString()}</div></div>`).join('');
+  t.innerHTML=`<div class="ctotal"><span>Jami:</span><span>${cart.reduce((s,i)=>s+i.price*i.qty,0).toLocaleString()} so'm</span></div>`;b.style.display='block';
 }
-
-function changeQty(id,d){
-  const i=cart.find(c=>c.id===id);
-  if(!i)return;
-  i.qty+=d;
-  if(i.qty<=0)cart=cart.filter(c=>c.id!==id);
-  updateCartUI();renderCart();
+function chQty(id,d){const i=cart.find(c=>c.id===id);if(!i)return;i.qty+=d;if(i.qty<=0)cart=cart.filter(c=>c.id!==id);updateBadge();renderCart()}
+function checkout(){if(window.Telegram&&window.Telegram.WebApp)window.Telegram.WebApp.sendData(JSON.stringify({action:'order',items:cart}));cart=[];updateBadge();renderP(curCat);document.getElementById('cartOverlay').classList.remove('open');showToast('Buyurtmangiz qabul qilindi!')}
+function goTab(i){
+  if(i===1){openCart();return}
+  ['home','favScreen','histScreen','profileScreen','settScreen'].forEach(s=>{const el=document.getElementById(s);if(el)el.style.display='none'});
+  document.querySelectorAll('.ni').forEach((n,j)=>n.classList.toggle('on',j===i));
+  curTab=i;const map={0:'home',2:'histScreen',3:'favScreen',4:'settScreen'};
+  const s=document.getElementById(map[i]||'home');if(s)s.style.display='flex';
+  if(i===3)renderFavs();
 }
-
-function checkout(){
-  if(window.Telegram&&window.Telegram.WebApp){
-    window.Telegram.WebApp.sendData(JSON.stringify({action:'order',items:cart}));
-  }
-  cart=[];updateCartUI();renderProducts(curCat);
-  document.getElementById('cartOverlay').classList.remove('open');
-  showToast('✅ Buyurtmangiz qabul qilindi!');
-}
-
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2000);
-}
-
-let secs=2*3600+34*60+59;
-setInterval(()=>{
-  secs--;if(secs<0)secs=3*3600;
-  const h=Math.floor(secs/3600),m=Math.floor((secs%3600)/60),s=secs%60;
-  document.getElementById('th').textContent=String(h).padStart(2,'0');
-  document.getElementById('tm').textContent=String(m).padStart(2,'0');
-  document.getElementById('ts').textContent=String(s).padStart(2,'0');
-},1000);
-
-let bannerIdx=0;
-setInterval(()=>{
-  bannerIdx=(bannerIdx+1)%3;
-  const t=document.getElementById('bannerTrack');
-  t.scrollTo({left:bannerIdx*t.offsetWidth,behavior:'smooth'});
-  [0,1,2].forEach(i=>{
-    document.getElementById('d'+i).className='dot'+(i===bannerIdx?' on':'');
-  });
-},3500);
-
-renderProducts('all');
-if(window.Telegram&&window.Telegram.WebApp){
-  window.Telegram.WebApp.ready();
-  window.Telegram.WebApp.expand();
-}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200)}
+let secs=2*3600+34*59;
+setInterval(()=>{if(--secs<0)secs=3*3600;const h=Math.floor(secs/3600),m=Math.floor((secs%3600)/60),s=secs%60;document.getElementById('th').textContent=String(h).padStart(2,'0');document.getElementById('tm').textContent=String(m).padStart(2,'0');document.getElementById('ts').textContent=String(s).padStart(2,'0')},1000);
+let bi=0;
+setInterval(()=>{bi=(bi+1)%3;const sc=document.getElementById('bannerScroll');sc.scrollTo({left:bi*sc.offsetWidth,behavior:'smooth'});[0,1,2].forEach(i=>document.getElementById('d'+i).className='dot'+(i===bi?' on':''))},3500);
+renderP('all');
+if(window.Telegram&&window.Telegram.WebApp){window.Telegram.WebApp.ready();window.Telegram.WebApp.expand()}
 </script>
 </body>
 </html>
